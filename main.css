@@ -15,63 +15,59 @@
     font-size: 17px;
 }
 
-#buscadorycheckboxs{
-   
+#buscadorycheckboxs {
+
     margin-top: 1rem;
     margin-bottom: 1rem;
- 
+
 }
 
-.card img{
-     height: 200px;
-     width: 100%;
-      object-fit: cover;
-    
+.card img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+
 }
 
-body>footer{
-     background-color: #21252956;
-      padding-top: 10px;
- padding-bottom: 10px;
- margin-top: 2rem;
+body>footer {
+    background-color: #21252956;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 2rem;
 }
 
-.input-group-text>label{
-     margin-left: 10px;
+.input-group-text>label {
+    margin-left: 10px;
 }
 
-#containerdetails img{
- height: fit-content;
- padding-top: 1rem;
+#containerdetails img {
+    height: fit-content;
+    padding-top: 1rem;
 }
 
 
-#containercontact textarea{
-     height: 100px;
-     
+#containercontact textarea {
+    height: 100px;
+
 }
 
-#submitcontact{
+#submitcontact {
     right: 0;
 }
 
-.subtitle_table{
+.subtitle_table {
     text-align: center;
 }
 
 
 
-table th,td{
+table th,
+td {
     border: solid black 1px;
     height: 2rem;
 }
 
 
-
-#buscador{
+#buscador {
     width: 10rem;
 }
-
-
-
-
