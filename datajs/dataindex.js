@@ -274,39 +274,41 @@ function pintarTarjetas(eventos) {
 }
 
 function filterTarjetas(selectedCategories, searchText) {
+  const tarjetasContainer = document.getElementById("divtarjetas");
+  const mensajeNoResultados = document.getElementById("mensajeNoResultados"); 
+  tarjetasContainer.innerHTML = ""; // Limpiar las tarjetas existentes
 
-  const tarjetasContainer = document.getElementById("divtarjetas"); 
-    tarjetasContainer.innerHTML = ""; // Limpiar las tarjetas existentes  const tarjetas = contenedor.getElementsByClassName("card");
-    
-    const filteredEvents = data.events.filter(event => {
+  const filteredEvents = data.events.filter(event => {
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(event.category);
       const matchesSearchText = event.name.toLowerCase().includes(searchText) || event.description.toLowerCase().includes(searchText);
       return matchesCategory && matchesSearchText;
   });
 
-    // Pintar las tarjetas filtradas
-    filteredEvents.forEach(event => {
-        const tarjeta = document.createElement('div');
-        tarjeta.className = "tarjeta"; 
-        tarjeta.innerHTML = `
-             <div class="card col">
-                <img class="card-img-top" src="${event.image}" alt="${event.name}">
-                <div class="card-body">
-                    <h5 class="card-title">${event.name}</h5>
-                    <p class="card-text">${event.description}</p>
-                    <p class="card-text">${event.category}</p>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <span>${event.price}</span>
-                    <a href="./details.html?id=${event._id}" class="btn btn-primary">Details</a>
-                </div>
-            </div>
-        `;
-        tarjetasContainer.appendChild(tarjeta);
-  
-  
-  });
-
-
+  // Verificar si hay eventos filtrados
+  if (filteredEvents.length === 0) {
+      mensajeNoResultados.style.display = "block"; // Mostrar el mensaje de no resultados
+  } else {
+      mensajeNoResultados.style.display = "none"; // Ocultar el mensaje de no resultados
+      // Pintar las tarjetas filtradas
+      filteredEvents.forEach(event => {
+          const tarjeta = document.createElement('div');
+          tarjeta.className = "tarjeta"; 
+          tarjeta.innerHTML = `
+              <div class="card col">
+                  <img class="card-img-top" src="${event.image}" alt="${event.name}">
+                  <div class="card-body">
+                      <h5 class="card-title">${event.name}</h5>
+                      <p class="card-text">${event.description}</p>
+                      <p class="card-text">${event.category}</p>
+                  </div>
+                  <div class="card-footer d-flex justify-content-between">
+                      <span>${event.price}</span>
+                      <a href="./details.html?id=${event._id}" class="btn btn-primary">Details</a>
+                  </div>
+              </div>
+          `;
+          tarjetasContainer.appendChild(tarjeta);
+      });
+  }
 }
 
