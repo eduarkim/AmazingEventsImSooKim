@@ -111,45 +111,15 @@
         <div class="container-fluid" id="buscadorycheckboxs">
             <div class="container-fluid row">
 
-                <div class="container col">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="food" name="checkcategory">
-                        <label class="form-check-label" for="food">
-                            Food
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="museum" name="checkcategory">
-                        <label class="form-check-label" for="museum">
-                            Museum
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="cinema" name="checkcategory">
-                        <label class="form-check-label" for="cinema">
-                            Cinema
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="race" name="checkcategory">
-                        <label class="form-check-label" for="race">
-                            Race
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="book" name="checkcategory">
-                        <label class="form-check-label" for="book">
-                            Book
-                        </label>
-                    </div>
-
+                <div class="container col" id="divcheckboxs">
+                   
                 </div>
                 <div class="col-sm-8 col-md-8 col-lg-2">
                     <div class="d-flex align-items-center">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search"
                             id="buscador">
 
-                        <button class="btn btn-outline-success" type="submit" id="botonbuscador">🔍</button>
+                   
                     </div>
                 </div>
 
@@ -163,6 +133,7 @@
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 card-deck" id="divtarjetas">
                
             </div>
+            <div id="mensajeNoResultados" style="display: none;">No se encontraron eventos que coincidan con la búsqueda.</div>
         </div>
 
     </main>
@@ -178,6 +149,7 @@
                             alt="logo de facebook"></a></div>
 
             </div>
+            <p>Creado por Im Soo Kim®️</p>
             <span class="text-end align-middle">
                 COHORT
             </span>

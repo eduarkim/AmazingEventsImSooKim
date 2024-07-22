@@ -35,6 +35,9 @@ body>footer {
     padding-bottom: 10px;
     margin-top: 2rem;
 }
+body>main{
+ min-height: 100vh;    
+}
 
 .input-group-text>label {
     margin-left: 10px;

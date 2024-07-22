@@ -8,7 +8,7 @@ const data = {
         date: "2022-12-12",
         description:
           "Enjoy your favourite dishes, from different countries, in a unique event for the whole family.",
-        category: "Food_Fair",
+        category: "Food Fair",
         place: "Room A",
         capacity: 45000,
         assistance: 42756,
@@ -22,7 +22,7 @@ const data = {
         date: "2023-08-12",
         description:
           "Enjoy the best Korean dishes, with international chefs and awesome events.",
-        category: "Food_Fair",
+        category: "Food Fair",
         place: "Room A",
         capacity: 45000,
         price: 10,
@@ -64,7 +64,7 @@ const data = {
         date: "2022-02-12",
         description:
           "For comic lovers, all your favourite characters gathered in one place.",
-        category: "Costume_Party",
+        category: "Costume Party",
         place: "Room C",
         capacity: 120000,
         assistance: 110000,
@@ -77,7 +77,7 @@ const data = {
         image: "https://i.postimg.cc/RZ9fH4Pr/halloween.jpg",
         date: "2023-02-12",
         description: "Come with your scariest costume and win incredible prizes.",
-        category: "Costume_Party",
+        category: "Costume Party",
         place: "Room C",
         capacity: 12000,
         estimate: 9000,
@@ -90,7 +90,7 @@ const data = {
         image: "https://i.postimg.cc/PrMJ0ZMc/Metallica-in-concert.jpg",
         date: "2023-01-22",
         description: "The only concert of the most emblematic band in the world.",
-        category: "Music_Concert",
+        category: "Music Concert",
         place: "Room A",
         capacity: 138000,
         estimate: 138000,
@@ -104,7 +104,7 @@ const data = {
         date: "2022-01-22",
         description:
           "The best national and international DJs gathered in one place.",
-        category: "Music_Concert",
+        category: "Music Concert",
         place: "Room A",
         capacity: 138000,
         assistance: 110300,
@@ -144,7 +144,7 @@ const data = {
         image: "https://i.postimg.cc/Sst763n6/book1.jpg",
         date: "2023-10-15",
         description: "Bring your unused school book and take the one you need.",
-        category: "Book_Exchange",
+        category: "Book Exchange",
         place: "Room D1",
         capacity: 150000,
         estimate: 123286,
@@ -158,7 +158,7 @@ const data = {
         date: "2022-11-09",
         description:
           "If you're a gastronomy lover come get the cookbook that best suits your taste and your family's.",
-        category: "Book_Exchange",
+        category: "Book Exchange",
         place: "Room D6",
         capacity: 130000,
         assistance: 90000,
@@ -195,120 +195,37 @@ const data = {
     ],
   };
 
-  document.addEventListener("DOMContentLoaded", () => {
-    pintarCheckboxs(data.events);
-    pintarTarjetas(data.events);
+function cargarDetalles() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventoId = urlParams.get('id');
 
-    const checkboxes = document.getElementsByName("checkcategory");
-    const filterTexto = document.getElementById("buscador");
-
-    // Función para obtener categorías seleccionadas y filtrar tarjetas
-    function actualizarFiltro() {
-        const selectedCategories = Array.from(checkboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
-        const texto = filterTexto.value.toLowerCase();
-        filterTarjetas(selectedCategories, texto);
-    }
-
-    // Añadir event listeners a los checkboxes
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener("change", actualizarFiltro);
-    });
-
-    // Añadir event listener al filtro de texto
-    filterTexto.addEventListener("keyup", actualizarFiltro);
-});
-
-function pintarCheckboxs(eventos) {
-    const contenCheckboxs = document.getElementById("divcheckboxs");
-    if (!contenCheckboxs) {
-        console.error("El contenedor de checkboxes no existe.");
-        return;
-    }
-
-    const categories = [...new Set(eventos.map(event => event.category))];
-    console.log("Categorías:", categories); // Depuración
-
-    categories.forEach((category, index) => {
-        const checkbox = document.createElement('div');
-        checkbox.className = "form-check form-check-inline";
-        checkbox.innerHTML = `
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="${category}" id="checkbox-categoria-${index}" name="checkcategory">
-                <label class="form-check-label" for="checkbox-categoria-${index}">
-                    ${category}
-                </label>
-            </div>
-        `;
-        contenCheckboxs.appendChild(checkbox);
-    });
-}
-
-function pintarTarjetas(eventos) {
-    const contenedor = document.getElementById("divtarjetas");
-    contenedor.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas tarjetas
-
-    eventos.forEach(evento => {
-        if (evento.date < data.currentDate) { // Asegúrate de que esta condición sea correcta
-            const tarjeta = document.createElement('div');
-            tarjeta.className = "card";
-            tarjeta.dataset.category = evento.category; // Añadir el atributo data-category
-
-            tarjeta.innerHTML = `
-                <div class="card col">
-                    <img class="card-img-top" src="${evento.image}" alt="${evento.name}">
-                    <div class="card-body">
-                        <h5 class="card-title">${evento.name}</h5>
-                        <p class="card-text">${evento.description}</p>
-                        <p class="card-text">${evento.category}</p>
+    const evento = data.events.find(event => event._id === eventoId);
+    if (evento) {
+        const container = document.getElementById("containerdetails");
+        container.innerHTML = `
+            <div class="card mb-8">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="${evento.image}" class="img-fluid rounded-start" alt="${evento.name}">
                     </div>
-                    <div class="card-footer d-flex justify-content-between">
-                        <span>${evento.price}</span>
-                        <a href="./details.html?id=${evento._id}" class="btn btn-primary">Details</a>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title">${evento.name}</h5>
+                            <p class="card-text">${evento.description}</p>
+                            <p class="card-text">Date: ${evento.date}</p>
+                            <p class="card-text">Category: ${evento.category}</p>
+                            <p class="card-text">Place: ${evento.place}</p>
+                            <p class="card-text">Capacity: ${evento.capacity}</p>
+                            <p class="card-text">Price: US$ ${evento.price}</p>
+                        </div>
                     </div>
-                </div>
-            `;
-
-            contenedor.appendChild(tarjeta);
-        }
-    });
-}
-
-function filterTarjetas(selectedCategories, searchText) {
-
-  const tarjetasContainer = document.getElementById("divtarjetas"); 
-    tarjetasContainer.innerHTML = ""; // Limpiar las tarjetas existentes  const tarjetas = contenedor.getElementsByClassName("card");
-    
-    const filteredEvents = data.events.filter(event => {
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(event.category);
-      const matchesSearchText = event.name.toLowerCase().includes(searchText) || event.description.toLowerCase().includes(searchText);
-      return matchesCategory && matchesSearchText;
-  });
-
-    // Pintar las tarjetas filtradas
-    filteredEvents.forEach(event => {
-        const tarjeta = document.createElement('div');
-        tarjeta.className = "tarjeta"; 
-        tarjeta.innerHTML = `
-             <div class="card col">
-                <img class="card-img-top" src="${event.image}" alt="${event.name}">
-                <div class="card-body">
-                    <h5 class="card-title">${event.name}</h5>
-                    <p class="card-text">${event.description}</p>
-                    <p class="card-text">${event.category}</p>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <span>${event.price}</span>
-                    <a href="./details.html?id=${event._id}" class="btn btn-primary">Details</a>
                 </div>
             </div>
         `;
-        tarjetasContainer.appendChild(tarjeta);
-  
-  
-  });
-
-
+    } else {
+        console.error("Evento no encontrado");
+    }
 }
 
+// Cargar detalles al iniciar la página
+window.onload = cargarDetalles;
