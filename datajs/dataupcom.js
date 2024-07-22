@@ -259,7 +259,7 @@ function pintarTarjetas(eventos) {
         tarjeta.innerHTML = `
             <div class="card col">
                 <img class="card-img-top" src="${evento.image}" alt="${evento.name}">
-                <div class="card-body">
+                <div class="card-body flex-grow-1">
                     <h5 class="card-title">${evento.name}</h5>
                     <p class="card-text">${evento.description}</p>
                     <p class="card-text">${evento.category}</p>
@@ -298,7 +298,7 @@ function filterTarjetas(selectedCategories, searchText) {
           tarjeta.innerHTML = `
               <div class="card col">
                   <img class="card-img-top" src="${event.image}" alt="${event.name}">
-                  <div class="card-body">
+                  <div class="card-body flex-grow-1">
                       <h5 class="card-title">${event.name}</h5>
                       <p class="card-text">${event.description}</p>
                       <p class="card-text">${event.category}</p>
