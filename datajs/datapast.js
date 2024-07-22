@@ -8,7 +8,7 @@ const data = {
         date: "2022-12-12",
         description:
           "Enjoy your favourite dishes, from different countries, in a unique event for the whole family.",
-        category: "Food_Fair",
+        category: "Food Fair",
         place: "Room A",
         capacity: 45000,
         assistance: 42756,
@@ -22,7 +22,7 @@ const data = {
         date: "2023-08-12",
         description:
           "Enjoy the best Korean dishes, with international chefs and awesome events.",
-        category: "Food_Fair",
+        category: "Food Fair",
         place: "Room A",
         capacity: 45000,
         price: 10,
@@ -64,7 +64,7 @@ const data = {
         date: "2022-02-12",
         description:
           "For comic lovers, all your favourite characters gathered in one place.",
-        category: "Costume_Party",
+        category: "Costume Party",
         place: "Room C",
         capacity: 120000,
         assistance: 110000,
@@ -77,7 +77,7 @@ const data = {
         image: "https://i.postimg.cc/RZ9fH4Pr/halloween.jpg",
         date: "2023-02-12",
         description: "Come with your scariest costume and win incredible prizes.",
-        category: "Costume_Party",
+        category: "Costume Party",
         place: "Room C",
         capacity: 12000,
         estimate: 9000,
@@ -90,7 +90,7 @@ const data = {
         image: "https://i.postimg.cc/PrMJ0ZMc/Metallica-in-concert.jpg",
         date: "2023-01-22",
         description: "The only concert of the most emblematic band in the world.",
-        category: "Music_Concert",
+        category: "Music Concert",
         place: "Room A",
         capacity: 138000,
         estimate: 138000,
@@ -104,7 +104,7 @@ const data = {
         date: "2022-01-22",
         description:
           "The best national and international DJs gathered in one place.",
-        category: "Music_Concert",
+        category: "Music Concert",
         place: "Room A",
         capacity: 138000,
         assistance: 110300,
@@ -144,7 +144,7 @@ const data = {
         image: "https://i.postimg.cc/Sst763n6/book1.jpg",
         date: "2023-10-15",
         description: "Bring your unused school book and take the one you need.",
-        category: "Book_Exchange",
+        category: "Book Exchange",
         place: "Room D1",
         capacity: 150000,
         estimate: 123286,
@@ -158,7 +158,7 @@ const data = {
         date: "2022-11-09",
         description:
           "If you're a gastronomy lover come get the cookbook that best suits your taste and your family's.",
-        category: "Book_Exchange",
+        category: "Book Exchange",
         place: "Room D6",
         capacity: 130000,
         assistance: 90000,
@@ -258,7 +258,7 @@ function pintarTarjetas(eventos) {
             tarjeta.innerHTML = `
                 <div class="card col d-flex">
                     <img class="card-img-top" src="${evento.image}" alt="${evento.name}">
-                    <div class="card-body d-flex d-column flex-grow-1">
+                    <div class="card-body d-flex flex-column flex-grow-1">
                         <h5 class="card-title">${evento.name}</h5>
                         <p class="card-text">${evento.description}</p>
                         <p class="card-text">${evento.category}</p>
@@ -298,7 +298,7 @@ function filterTarjetas(selectedCategories, searchText) {
           tarjeta.innerHTML = `
               <div class="card col d-flex">
                   <img class="card-img-top" src="${event.image}" alt="${event.name}">
-                  <div class="card-body d-flex d-column flex-grow-1">
+                  <div class="card-body d-flex flex-column flex-grow-1">
                       <h5 class="card-title">${event.name}</h5>
                       <p class="card-text">${event.description}</p>
                       <p class="card-text">${event.category}</p>

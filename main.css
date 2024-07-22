@@ -74,3 +74,20 @@ td {
 #buscador {
     width: 10rem;
 }
+
+/* crear un estilo bonito para el div */
+#mensajeNoResultados{
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    background-color: azure;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
