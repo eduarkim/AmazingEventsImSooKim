@@ -251,13 +251,13 @@ function pintarTarjetas(eventos) {
 
     eventos.forEach(evento => {
         const tarjeta = document.createElement('div');
-        tarjeta.className = "card";
+        tarjeta.className = "card col d-flex";
         tarjeta.dataset.category = evento.category; 
 
         tarjeta.innerHTML = `
-            <div class="card col">
+            <div class="card col d-flex">
                 <img class="card-img-top" src="${evento.image}" alt="${evento.name}">
-                <div class="card-body flex-grow-1">
+                <div class="card-body d-flex flex-column flex-grow-1">
                     <h5 class="card-title">${evento.name}</h5>
                     <p class="card-text">${evento.description}</p>
                     <p class="card-text">${evento.category}</p>
@@ -292,11 +292,11 @@ function filterTarjetas(selectedCategories, searchText) {
         // Pintar las tarjetas filtradas
         filteredEvents.forEach(event => {
             const tarjeta = document.createElement('div');
-            tarjeta.className = "tarjeta"; 
+            tarjeta.className = "card col d-flex"; 
             tarjeta.innerHTML = `
-                <div class="card col">
+                <div class="card col d-flex">
                     <img class="card-img-top" src="${event.image}" alt="${event.name}">
-                    <div class="card-body flex-grow-1">
+                    <div class="card-body d-flex flex-column flex-grow-1">
                         <h5 class="card-title">${event.name}</h5>
                         <p class="card-text">${event.description}</p>
                         <p class="card-text">${event.category}</p>
