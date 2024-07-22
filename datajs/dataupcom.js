@@ -278,7 +278,7 @@ function pintarTarjetas(eventos) {
 function filterTarjetas(selectedCategories, searchText) {
   const tarjetasContainer = document.getElementById("divtarjetas");
   const mensajeNoResultados = document.getElementById("mensajeNoResultados"); 
-  tarjetasContainer.innerHTML = ""; // Limpiar las tarjetas existentes
+  tarjetasContainer.innerHTML = ""; 
 
   const filteredEvents = data.events.filter(event => {
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(event.category);
@@ -286,12 +286,12 @@ function filterTarjetas(selectedCategories, searchText) {
       return matchesCategory && matchesSearchText;
   });
 
-  // Verificar si hay eventos filtrados
+ 
   if (filteredEvents.length === 0) {
-      mensajeNoResultados.style.display = "block"; // Mostrar el mensaje de no resultados
+      mensajeNoResultados.style.display = "block"; 
   } else {
-      mensajeNoResultados.style.display = "none"; // Ocultar el mensaje de no resultados
-      // Pintar las tarjetas filtradas
+      mensajeNoResultados.style.display = "none"; 
+      
       filteredEvents.forEach(event => {
           const tarjeta = document.createElement('div');
           tarjeta.className = "tarjeta"; 

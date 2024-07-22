@@ -202,7 +202,7 @@ const data = {
     const checkboxes = document.getElementsByName("checkcategory");
     const filterTexto = document.getElementById("buscador");
 
-    // Función para obtener categorías seleccionadas y filtrar tarjetas
+    
     function actualizarFiltro() {
         const selectedCategories = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
@@ -211,12 +211,12 @@ const data = {
         filterTarjetas(selectedCategories, texto);
     }
 
-    // Añadir event listeners a los checkboxes
+   
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener("change", actualizarFiltro);
     });
 
-    // Añadir event listener al filtro de texto
+    
     filterTexto.addEventListener("keyup", actualizarFiltro);
 });
 
@@ -228,7 +228,7 @@ function pintarCheckboxs(eventos) {
     }
 
     const categories = [...new Set(eventos.map(event => event.category))];
-    console.log("Categorías:", categories); // Depuración
+    console.log("Categorías:", categories); 
 
     categories.forEach((category, index) => {
         const checkbox = document.createElement('div');
@@ -247,13 +247,13 @@ function pintarCheckboxs(eventos) {
 
 function pintarTarjetas(eventos) {
     const contenedor = document.getElementById("divtarjetas");
-    contenedor.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas tarjetas
+    contenedor.innerHTML = ''; 
 
     eventos.forEach(evento => {
-        if (evento.date < data.currentDate) { // Asegúrate de que esta condición sea correcta
+        if (evento.date < data.currentDate) { 
             const tarjeta = document.createElement('div');
             tarjeta.className = "card";
-            tarjeta.dataset.category = evento.category; // Añadir el atributo data-category
+            tarjeta.dataset.category = evento.category; 
 
             tarjeta.innerHTML = `
                 <div class="card col">
@@ -278,7 +278,7 @@ function pintarTarjetas(eventos) {
 function filterTarjetas(selectedCategories, searchText) {
   const tarjetasContainer = document.getElementById("divtarjetas");
   const mensajeNoResultados = document.getElementById("mensajeNoResultados"); 
-  tarjetasContainer.innerHTML = ""; // Limpiar las tarjetas existentes
+  tarjetasContainer.innerHTML = ""; 
 
   const filteredEvents = data.events.filter(event => {
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(event.category);
@@ -288,9 +288,9 @@ function filterTarjetas(selectedCategories, searchText) {
 
   // Verificar si hay eventos filtrados
   if (filteredEvents.length === 0) {
-      mensajeNoResultados.style.display = "block"; // Mostrar el mensaje de no resultados
+      mensajeNoResultados.style.display = "block"; 
   } else {
-      mensajeNoResultados.style.display = "none"; // Ocultar el mensaje de no resultados
+      mensajeNoResultados.style.display = "none"; 
       // Pintar las tarjetas filtradas
       filteredEvents.forEach(event => {
           const tarjeta = document.createElement('div');
