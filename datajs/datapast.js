@@ -286,12 +286,12 @@ function filterTarjetas(selectedCategories, searchText) {
       return matchesCategory && matchesSearchText;
   });
 
-  // Verificar si hay eventos filtrados
+  
   if (filteredEvents.length === 0) {
       mensajeNoResultados.style.display = "block"; 
   } else {
       mensajeNoResultados.style.display = "none"; 
-      // Pintar las tarjetas filtradas
+    
       filteredEvents.forEach(event => {
           const tarjeta = document.createElement('div');
           tarjeta.className = "tarjeta"; 

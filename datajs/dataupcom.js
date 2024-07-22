@@ -229,7 +229,7 @@ function pintarCheckboxs(eventos) {
     }
 
     const categories = [...new Set(eventos.map(event => event.category))];
-    console.log("Categorías:", categories); // Depuración
+    console.log("Categorías:", categories); 
 
     categories.forEach((category, index) => {
         const checkbox = document.createElement('div');
@@ -248,13 +248,13 @@ function pintarCheckboxs(eventos) {
 
 function pintarTarjetas(eventos) {
     const contenedor = document.getElementById("divtarjetas");
-    contenedor.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas tarjetas
+    contenedor.innerHTML = ''; 
 
     eventos.forEach(evento => {
       if(evento.date > data.currentDate){  
       const tarjeta = document.createElement('div');
         tarjeta.className = "card";
-        tarjeta.dataset.category = evento.category; // Añadir el atributo data-category
+        tarjeta.dataset.category = evento.category; 
         
         tarjeta.innerHTML = `
             <div class="card col">
