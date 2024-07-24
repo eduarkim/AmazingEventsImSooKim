@@ -220,32 +220,28 @@ const data = {
         filterTarjetas(selectedCategories, texto);
     });
 });
-
 function pintarCheckboxs(eventos) {
-    const contenCheckboxs = document.getElementById("divcheckboxs");
-    if (!contenCheckboxs) {
-        console.error("El contenedor de checkboxes no existe.");
-        return;
-    }
+  const contenCheckboxs = document.getElementById("divcheckboxs");
+  if (!contenCheckboxs) {
+      console.error("El contenedor de checkboxes no existe.");
+      return;
+  }
 
-    const categories = [...new Set(eventos.map(event => event.category))];
-    console.log("Categorías:", categories); 
+  const categories = [...new Set(eventos.map(event => event.category))];
+  console.log("Categorías:", categories);
 
-    categories.forEach((category, index) => {
-        const checkbox = document.createElement('div');
-        checkbox.className = "form-check form-check-inline";
-        checkbox.innerHTML = `
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="${category}" id="checkbox-categoria-${index}" name="checkcategory">
-                <label class="form-check-label" for="checkbox-categoria-${index}">
-                    ${category}
-                </label>
-            </div>
-        `;
-        contenCheckboxs.appendChild(checkbox);
-    });
+  categories.forEach((category, index) => {
+      const checkbox = document.createElement('div');
+      checkbox.className = "form-check form-check-inline";
+      checkbox.innerHTML = `
+          <input class="form-check-input" type="checkbox" value="${category}" id="checkbox-categoria-${index}" name="checkcategory">
+          <label class="form-check-label" for="checkbox-categoria-${index}">
+              ${category}
+          </label>
+      `;
+      contenCheckboxs.appendChild(checkbox);
+  });
 }
-
 function pintarTarjetas(eventos) {
     const contenedor = document.getElementById("divtarjetas");
     contenedor.innerHTML = ''; 
