@@ -195,108 +195,99 @@ const data = {
     ],
   };
 
+  let arregloFecha = data.events.filter(e => e.date < data.currentDate);
+
   document.addEventListener("DOMContentLoaded", () => {
-    pintarCheckboxs(data.events);
-    pintarTarjetas(data.events);
-
-    const checkboxes = document.getElementsByName("checkcategory");
-    const filterTexto = document.getElementById("buscador");
-
-    
-    function actualizarFiltro() {
-        const selectedCategories = Array.from(checkboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
-        const texto = filterTexto.value.toLowerCase();
-        filterTarjetas(selectedCategories, texto);
-    }
-
-   
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener("change", actualizarFiltro);
-    });
-
-    
-    filterTexto.addEventListener("keyup", actualizarFiltro);
-});
-
-function pintarCheckboxs(eventos) {
-    const contenCheckboxs = document.getElementById("divcheckboxs");
-    if (!contenCheckboxs) {
-        console.error("El contenedor de checkboxes no existe.");
-        return;
-    }
-
-    const categories = [...new Set(eventos.map(event => event.category))];
-    console.log("Categorías:", categories); 
-
-    categories.forEach((category, index) => {
-        const checkbox = document.createElement('div');
-        checkbox.className = "form-check form-check-inline";
-        checkbox.innerHTML = `
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="${category}" id="checkbox-categoria-${index}" name="checkcategory">
-                <label class="form-check-label" for="checkbox-categoria-${index}">
-                    ${category}
-                </label>
-            </div>
-        `;
-        contenCheckboxs.appendChild(checkbox);
-    });
-}
-
-function pintarTarjetas(eventos) {
-    const contenedor = document.getElementById("divtarjetas");
-    contenedor.innerHTML = ''; 
-
-    eventos.forEach(evento => {
-        if (evento.date < data.currentDate) { 
-            const tarjeta = document.createElement('div');
-            tarjeta.className = "card col d-flex";
-            tarjeta.dataset.category = evento.category; 
-
-            tarjeta.innerHTML = `
-                <div class="card col d-flex">
-                    <img class="card-img-top" src="${evento.image}" alt="${evento.name}">
-                    <div class="card-body d-flex flex-column flex-grow-1">
-                        <h5 class="card-title">${evento.name}</h5>
-                        <p class="card-text">${evento.description}</p>
-                        <p class="card-text">${evento.category}</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between">
-                        <span>${evento.price}</span>
-                        <a href="./details.html?id=${evento._id}" class="btn btn-primary">Details</a>
-                    </div>
-                </div>
-            `;
-
-            contenedor.appendChild(tarjeta);
-        }
-    });
-}
-
-function filterTarjetas(selectedCategories, searchText) {
-  const tarjetasContainer = document.getElementById("divtarjetas");
-  const mensajeNoResultados = document.getElementById("mensajeNoResultados"); 
-  tarjetasContainer.innerHTML = ""; 
-
-  const filteredEvents = data.events.filter(event => {
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(event.category);
-      const matchesSearchText = event.name.toLowerCase().includes(searchText) || event.description.toLowerCase().includes(searchText);
-      return matchesCategory && matchesSearchText;
-  });
-
+      pintarCheckboxs(arregloFecha);
+      pintarTarjetas(arregloFecha);
   
-  if (filteredEvents.length === 0) {
-      mensajeNoResultados.style.display = "block"; 
-  } else {
-      mensajeNoResultados.style.display = "none"; 
-    
-      filteredEvents.forEach(event => {
+      const checkboxes = document.getElementsByName("checkcategory");
+      const filterTexto = document.getElementById("buscador");
+  
+      function actualizarFiltro() {
+          const selectedCategories = Array.from(checkboxes)
+              .filter(checkbox => checkbox.checked)
+              .map(checkbox => checkbox.value);
+          const texto = filterTexto.value.toLowerCase();
+          filterTarjetas(selectedCategories, texto);
+      }
+  
+      checkboxes.forEach(checkbox => {
+          checkbox.addEventListener("change", actualizarFiltro);
+      });
+  
+      filterTexto.addEventListener("keyup", actualizarFiltro);
+  });
+  
+  function pintarCheckboxs(eventos) {
+      const contenCheckboxs = document.getElementById("divcheckboxs");
+      if (!contenCheckboxs) {
+          console.error("El contenedor de checkboxes no existe.");
+          return;
+      }
+  
+      const categories = [...new Set(eventos.map(event => event.category))];
+      console.log("Categorías:", categories);
+  
+      categories.forEach((category, index) => {
+          const checkbox = document.createElement('div');
+          checkbox.className = "form-check form-check-inline";
+          checkbox.innerHTML = `
+              <input class="form-check-input" type="checkbox" value="${category}" id="checkbox-categoria-${index}" name="checkcategory">
+              <label class="form-check-label" for="checkbox-categoria-${index}">
+                  ${category}
+              </label>
+          `;
+          contenCheckboxs.appendChild(checkbox);
+      });
+  }
+  
+  function pintarTarjetas(eventos) {
+      const contenedor = document.getElementById("divtarjetas");
+      contenedor.innerHTML = '';
+  
+      eventos.forEach(evento => {
           const tarjeta = document.createElement('div');
-          tarjeta.className = "card col d-flex"; 
+          tarjeta.className = "card col d-flex";
+          tarjeta.dataset.category = evento.category;
+  
           tarjeta.innerHTML = `
-              <div class="card col d-flex">
+              <img class="card-img-top" src="${evento.image}" alt="${evento.name}">
+              <div class="card-body d-flex flex-column flex-grow-1">
+                  <h5 class="card-title">${evento.name}</h5>
+                  <p class="card-text">${evento.description}</p>
+                  <p class="card-text">${evento.category}</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                  <span>${evento.price}</span>
+                  <a href="./details.html?id=${evento._id}" class="btn btn-primary">Details</a>
+              </div>
+          `;
+  
+          contenedor.appendChild(tarjeta);
+      });
+  }
+  
+  function filterTarjetas(selectedCategories, searchText) {
+      const tarjetasContainer = document.getElementById("divtarjetas");
+      const mensajeNoResultados = document.getElementById("mensajeNoResultados");
+      tarjetasContainer.innerHTML = "";
+  
+      const filteredEvents = arregloFecha.filter(event => {
+          const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(event.category);
+          const matchesSearchText = event.name.toLowerCase().includes(searchText) || event.description.toLowerCase().includes(searchText);
+          return matchesCategory && matchesSearchText;
+      });
+  
+      if (filteredEvents.length === 0) {
+          mensajeNoResultados.style.display = "block";
+      } else {
+          mensajeNoResultados.style.display = "none";
+  
+          filteredEvents.forEach(event => {
+              const tarjeta = document.createElement('div');
+              tarjeta.className = "card col d-flex";
+              tarjeta.innerHTML = `
                   <img class="card-img-top" src="${event.image}" alt="${event.name}">
                   <div class="card-body d-flex flex-column flex-grow-1">
                       <h5 class="card-title">${event.name}</h5>
@@ -307,9 +298,8 @@ function filterTarjetas(selectedCategories, searchText) {
                       <span>${event.price}</span>
                       <a href="./details.html?id=${event._id}" class="btn btn-primary">Details</a>
                   </div>
-              </div>
-          `;
-          tarjetasContainer.appendChild(tarjeta);
-      });
+              `;
+              tarjetasContainer.appendChild(tarjeta);
+          });
+      }
   }
-}

@@ -195,10 +195,10 @@ const data = {
     ],
   };
 
-
+  let arregloFecha = data.events.filter(e => e.date > data.currentDate);
   document.addEventListener("DOMContentLoaded", () => {
-    pintarCheckboxs(data.events);
-    pintarTarjetas(data.events);
+    pintarCheckboxs(arregloFecha);
+    pintarTarjetas(arregloFecha);
 
     const checkboxes = document.getElementsByName("checkcategory");
     checkboxes.forEach(checkbox => {
@@ -251,7 +251,7 @@ function pintarTarjetas(eventos) {
     contenedor.innerHTML = ''; 
 
     eventos.forEach(evento => {
-      if(evento.date > data.currentDate){  
+        
       const tarjeta = document.createElement('div');
         tarjeta.className = "card col d-flex";
         tarjeta.dataset.category = evento.category; 
@@ -272,7 +272,7 @@ function pintarTarjetas(eventos) {
         `;
 
         contenedor.appendChild(tarjeta);
-    }});
+    });
 }
 
 function filterTarjetas(selectedCategories, searchText) {
@@ -280,7 +280,7 @@ function filterTarjetas(selectedCategories, searchText) {
   const mensajeNoResultados = document.getElementById("mensajeNoResultados"); 
   tarjetasContainer.innerHTML = ""; 
 
-  const filteredEvents = data.events.filter(event => {
+  const filteredEvents = arregloFecha.filter(event => {
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(event.category);
       const matchesSearchText = event.name.toLowerCase().includes(searchText) || event.description.toLowerCase().includes(searchText);
       return matchesCategory && matchesSearchText;
