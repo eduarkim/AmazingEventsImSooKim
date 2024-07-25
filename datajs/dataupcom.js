@@ -196,116 +196,102 @@ const data = {
   };
 
   let arregloFecha = data.events.filter(e => e.date > data.currentDate);
-  document.addEventListener("DOMContentLoaded", () => {
-    pintarCheckboxs(arregloFecha);
-    pintarTarjetas(arregloFecha);
-
-    const checkboxes = document.getElementsByName("checkcategory");
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener("change", () => {
-            const selectedCategories = Array.from(checkboxes)
-                .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.value);
-            const texto = document.getElementById("buscador").value.toLowerCase();
-            filterTarjetas(selectedCategories, texto);
-        });
-    });
-
-    let filterTexto = document.getElementById("buscador");
-    filterTexto.addEventListener("keyup", function (event) {
-        const texto = event.target.value.toLowerCase();
-        const selectedCategories = Array.from(checkboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
-        filterTarjetas(selectedCategories, texto);
-    });
-});
-function pintarCheckboxs(eventos) {
-  const contenCheckboxs = document.getElementById("divcheckboxs");
-  if (!contenCheckboxs) {
-      console.error("El contenedor de checkboxes no existe.");
-      return;
-  }
-
-  const categories = [...new Set(eventos.map(event => event.category))];
-  console.log("Categorías:", categories);
-
-  categories.forEach((category, index) => {
-      const checkbox = document.createElement('div');
-      checkbox.className = "form-check form-check-inline";
-      checkbox.innerHTML = `
-          <input class="form-check-input" type="checkbox" value="${category}" id="checkbox-categoria-${index}" name="checkcategory">
-          <label class="form-check-label" for="checkbox-categoria-${index}">
-              ${category}
-          </label>
-      `;
-      contenCheckboxs.appendChild(checkbox);
+  const contenedorTarjetas = document.getElementById("divtarjetas");
+  const contenedorCheckboxs = document.getElementById("divcheckboxs");
+  const mensajeNoResultados = document.getElementById("mensajeNoResultados");
+  
+  let categorias = arregloFecha.map((event) => event.category);
+  let categoriasUnicas = [...new Set(categorias)];
+  
+  pintarCheckBoxs(categoriasUnicas);
+  pintarTarjetas(arregloFecha, contenedorTarjetas);
+  
+  
+  document.getElementById("buscador").addEventListener('keyup', e => {
+    let arregloFiltradoTexto = filtroTexto(arregloFecha);
+    let arregloFiltradoChecks = filtroChecks(arregloFiltradoTexto);
+    if(arregloFiltradoChecks.length != 0){
+      pintarTarjetas(arregloFiltradoChecks, contenedorTarjetas);
+    }else{
+      let mensajeNoResultados = document.createElement("div");
+      mensajeNoResultados.id = "mensajeNoResultados";
+      mensajeNoResultados.textContent = "No se encontraron resultados";
+      contenedorTarjetas.innerHTML = "";
+      contenedorTarjetas.appendChild(mensajeNoResultados);
+    }
   });
-}
-function pintarTarjetas(eventos) {
-    const contenedor = document.getElementById("divtarjetas");
-    contenedor.innerHTML = ''; 
-
-    eventos.forEach(evento => {
-        
-      const tarjeta = document.createElement('div');
-        tarjeta.className = "card col d-flex";
-        tarjeta.dataset.category = evento.category; 
-        
-        tarjeta.innerHTML = `
-            <div class="card col d-flex">
-                <img class="card-img-top" src="${evento.image}" alt="${evento.name}">
-                <div class="card-body d-flex flex-column flex-grow-1">
-                    <h5 class="card-title">${evento.name}</h5>
-                    <p class="card-text">${evento.description}</p>
-                    <p class="card-text">${evento.category}</p>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <span>${evento.price}</span>
-                    <a href="./details.html?id=${evento._id}" class="btn btn-primary">Details</a>
-                </div>
-            </div>
-        `;
-
-        contenedor.appendChild(tarjeta);
-    });
-}
-
-function filterTarjetas(selectedCategories, searchText) {
-  const tarjetasContainer = document.getElementById("divtarjetas");
-  const mensajeNoResultados = document.getElementById("mensajeNoResultados"); 
-  tarjetasContainer.innerHTML = ""; 
-
-  const filteredEvents = arregloFecha.filter(event => {
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(event.category);
-      const matchesSearchText = event.name.toLowerCase().includes(searchText) || event.description.toLowerCase().includes(searchText);
-      return matchesCategory && matchesSearchText;
+  
+  document.getElementById("divcheckboxs").addEventListener('change', e => {
+    let arregloFiltradoChecks = filtroChecks(arregloFecha);
+    let arregloFiltradoTexto = filtroTexto(arregloFiltradoChecks);
+    if(arregloFiltradoTexto.length !== 0){
+      pintarTarjetas(arregloFiltradoTexto, contenedorTarjetas);
+    }else {
+      let mensajeNoResultados = document.createElement("div");
+      mensajeNoResultados.id = "mensajeNoResultados";
+      mensajeNoResultados.textContent = "No se encontraron resultados";
+      contenedorTarjetas.innerHTML = "";
+      contenedorTarjetas.appendChild(mensajeNoResultados);
+    }
   });
-
- 
-  if (filteredEvents.length === 0) {
-      mensajeNoResultados.style.display = "block"; 
-  } else {
-      mensajeNoResultados.style.display = "none"; 
-      
-      filteredEvents.forEach(event => {
-          const tarjeta = document.createElement('div');
-          tarjeta.className = "card col d-flex"; 
-          tarjeta.innerHTML = `
-              <div class="card col d-flex">
-                  <img class="card-img-top" src="${event.image}" alt="${event.name}">
-                  <div class="card-body d-flex flex-column flex-grow-1">
-                      <h5 class="card-title">${event.name}</h5>
-                      <p class="card-text">${event.description}</p>
-                      <p class="card-text">${event.category}</p>
-                  </div>
-                  <div class="card-footer d-flex justify-content-between">
-                      <span>${event.price}</span>
-                      <a href="./details.html?id=${event._id}" class="btn btn-primary">Details</a>
-                  </div>
-              </div>
-          `;
-          tarjetasContainer.appendChild(tarjeta);
-      });
+  
+  
+  
+  function pintarTarjetas(arregloEventos, contenedor) {
+    let tamanio = arregloEventos.length;
+  
+    contenedor.innerHTML = "";
+    for (let i = 0; i < tamanio; i++) {
+      let tarjeta = document.createElement("div");
+      tarjeta.className = "card col d-flex";
+      tarjeta.innerHTML = `
+  
+       <div class="card col d-flex">
+       <img class="card-img-top" src="${arregloEventos[i].image}" alt="${arregloEventos[i].name}">
+       <div class="card-body d-flex flex-column flex-grow-1">
+           <h5 class="card-title">${arregloEventos[i].name}</h5>
+           <p class="card-text">${arregloEventos[i].description}</p>
+           <p class="card-text">${arregloEventos[i].category}</p>
+       </div>
+       <div class="card-footer d-flex justify-content-between">
+           <span>u$u ${arregloEventos[i].price}</span>
+           <a href="./details.html?id=${arregloEventos[i]._id}" class="btn btn-primary">Details</a>
+       </div>
+   </div>
+         `
+      contenedor.appendChild(tarjeta);
+    }
   }
-}
+  
+  function pintarCheckBoxs(arregloCategorias) {
+    for (let i = 0; i < arregloCategorias.length; i++) {
+      let nuevoCheck = document.createElement("div")
+      nuevoCheck.className = "form-check form-check-inline";
+      nuevoCheck.innerHTML = `
+      <input class="form-check-input" type="checkbox" value="${arregloCategorias[i]}" id="${arregloCategorias[i].replace(" ", "-")}" name="checkcategory">
+      <label class="form-check-label" for="${arregloCategorias[i].replace(" ", "-")}">${arregloCategorias[i]}</label>
+      `
+      document.getElementById("divcheckboxs").appendChild(nuevoCheck);
+    }
+  }
+  
+  function filtroTexto(arregloEventos) {
+    let texto = document.getElementById("buscador").value.toLowerCase();
+    let arregloFiltrado = arregloEventos
+    if(texto != null || texto != undefined) {
+      arregloFiltrado = arregloEventos.filter(evento => evento.name.toLowerCase().includes(texto) || 
+      evento.description.toLowerCase().includes(texto));
+    }
+    return arregloFiltrado;
+  }
+  
+  function filtroChecks(arregloEventos) {
+    let checkboxChecked = [...document.querySelectorAll('input[type=checkbox]:checked')];
+    checkboxChecked = checkboxChecked.map(e=> e.value)
+    
+    let arregloFiltrado = arregloEventos
+    if(checkboxChecked.length != 0){
+      arregloFiltrado = arregloEventos.filter(evento => checkboxChecked.includes(evento.category))
+    }
+    return arregloFiltrado
+  }
