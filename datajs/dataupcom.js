@@ -198,12 +198,12 @@ const data = {
   let arregloFecha = data.events.filter(e => e.date > data.currentDate);
   const contenedorTarjetas = document.getElementById("divtarjetas");
   const contenedorCheckboxs = document.getElementById("divcheckboxs");
-  const mensajeNoResultados = document.getElementById("mensajeNoResultados");
+  
   
   let categorias = arregloFecha.map((event) => event.category);
   let categoriasUnicas = [...new Set(categorias)];
   
-  pintarCheckBoxs(categoriasUnicas);
+  pintarCheckBoxs(categoriasUnicas, contenedorCheckboxs);
   pintarTarjetas(arregloFecha, contenedorTarjetas);
   
   
@@ -263,7 +263,7 @@ const data = {
     }
   }
   
-  function pintarCheckBoxs(arregloCategorias) {
+  function pintarCheckBoxs(arregloCategorias, contenedorcheck) {
     for (let i = 0; i < arregloCategorias.length; i++) {
       let nuevoCheck = document.createElement("div")
       nuevoCheck.className = "form-check form-check-inline";
@@ -271,7 +271,7 @@ const data = {
       <input class="form-check-input" type="checkbox" value="${arregloCategorias[i]}" id="${arregloCategorias[i].replace(" ", "-")}" name="checkcategory">
       <label class="form-check-label" for="${arregloCategorias[i].replace(" ", "-")}">${arregloCategorias[i]}</label>
       `
-      document.getElementById("divcheckboxs").appendChild(nuevoCheck);
+      contenedorcheck.appendChild(nuevoCheck);
     }
   }
   
