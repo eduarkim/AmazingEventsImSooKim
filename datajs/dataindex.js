@@ -249,7 +249,7 @@ function pintarTarjetas(arregloEventos, contenedor) {
     tarjeta.className = "card col d-flex";
     tarjeta.innerHTML = `
 
-     <div class="card col d-flex">
+     <div class="card col d-flex mb-4">
      <img class="card-img-top" src="${arregloEventos[i].image}" alt="${arregloEventos[i].name}">
      <div class="card-body d-flex flex-column flex-grow-1">
          <h5 class="card-title">${arregloEventos[i].name}</h5>
