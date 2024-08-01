@@ -1,3 +1,4 @@
+
 const data = {
     currentDate: "2023-01-01",
     events: [
@@ -195,9 +196,14 @@ const data = {
     ],
   };
 
+// usar la base de dato de la siguiente api
 function cargarDetalles() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventoId = urlParams.get('id');
+  const urlParams = new URLSearchParams(window.location.search);
+  const eventoId = urlParams.get('id');
+
+  
+
+
 
     const evento = data.events.find(event => event._id === eventoId);
     if (evento) {
@@ -227,6 +233,7 @@ function cargarDetalles() {
     } else {
         console.error("Evento no encontrado");
     }
+
 }
 
 // Cargar detalles al iniciar la página

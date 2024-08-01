@@ -1,3 +1,4 @@
+/*
 const data = {
     currentDate: "2023-01-01",
     events: [
@@ -194,6 +195,13 @@ const data = {
       },
     ],
   };
+*/
+import {pintarTarjetas, pintarCheckBoxs} from "../module/funciones.js";
+let url = "https://aulamindhub.github.io/amazing-api/events.json"
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
 
   let arregloFecha = data.events.filter(e => e.date > data.currentDate);
   const contenedorTarjetas = document.getElementById("divtarjetas");
@@ -235,7 +243,7 @@ const data = {
     }
   });
   
-  
+  /*
   
   function pintarTarjetas(arregloEventos, contenedor) {
     let tamanio = arregloEventos.length;
@@ -274,7 +282,7 @@ const data = {
       contenedorcheck.appendChild(nuevoCheck);
     }
   }
-  
+  */
   function filtroTexto(arregloEventos) {
     let texto = document.getElementById("buscador").value.toLowerCase();
     let arregloFiltrado = arregloEventos
@@ -295,3 +303,6 @@ const data = {
     }
     return arregloFiltrado
   }
+
+})
+.catch(error => console.log(error));
