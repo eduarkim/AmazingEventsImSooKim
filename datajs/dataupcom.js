@@ -196,7 +196,7 @@ const data = {
     ],
   };
 */
-import {pintarTarjetas, pintarCheckBoxs} from "../module/funciones.js";
+import {pintarTarjetas, pintarCheckBoxs, filtroChecks, filtroTexto} from "../module/funciones.js";
 let url = "https://aulamindhub.github.io/amazing-api/events.json"
 fetch(url)
   .then(response => response.json())
@@ -283,6 +283,7 @@ fetch(url)
     }
   }
   */
+/*
   function filtroTexto(arregloEventos) {
     let texto = document.getElementById("buscador").value.toLowerCase();
     let arregloFiltrado = arregloEventos
@@ -303,6 +304,6 @@ fetch(url)
     }
     return arregloFiltrado
   }
-
+*/
 })
 .catch(error => console.log(error));

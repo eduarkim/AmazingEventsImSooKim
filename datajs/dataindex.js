@@ -1,4 +1,4 @@
-import {pintarTarjetas, pintarCheckBoxs} from "../module/funciones.js";
+import {pintarTarjetas, pintarCheckBoxs, filtroChecks, filtroTexto} from "../module/funciones.js";
 
 
 let url = "https://aulamindhub.github.io/amazing-api/events.json"
@@ -87,7 +87,7 @@ let url = "https://aulamindhub.github.io/amazing-api/events.json"
         }
       }
    */   
-  
+  /*
       function filtroTexto(arregloEventos) {
         let texto = document.getElementById("buscador").value.toLowerCase();
         let arregloFiltrado = arregloEventos
@@ -108,7 +108,8 @@ let url = "https://aulamindhub.github.io/amazing-api/events.json"
         }
         return arregloFiltrado
       }
-
+*/
     })
-    .catch(error => console.log(error));
   
+  
+    .catch(error => console.log(error));

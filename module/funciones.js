@@ -16,7 +16,8 @@ export function pintarTarjetas(arregloEventos, contenedor) {
        </div>
        <div class="card-footer d-flex justify-content-between">
            <span>u$u ${arregloEventos[i].price}</span>
-           <a href="./details.html?id=${arregloEventos[i]._id}" class="btn btn-primary">Details</a>
+           <a href="../details.html?id=${arregloEventos[i]._id}" class="btn btn-primary">Details</a>
+         
        </div>
    </div>
          `
@@ -35,9 +36,9 @@ export function pintarTarjetas(arregloEventos, contenedor) {
       contenedorcheck.appendChild(nuevoCheck);
     }
   }
-/*
- export function filtroTexto(arregloEventos, texto) {
-  //  let texto = document.getElementById("buscador").value.toLowerCase();
+
+ export function filtroTexto(arregloEventos) {
+    let texto = document.getElementById("buscador").value.toLowerCase();
     let arregloFiltrado = arregloEventos
     if(texto != null || texto != undefined) {
       arregloFiltrado = arregloEventos.filter(evento => evento.name.toLowerCase().includes(texto) || 
@@ -46,8 +47,8 @@ export function pintarTarjetas(arregloEventos, contenedor) {
     return arregloFiltrado;
   }
   
- export function filtroChecks(arregloEventos, checkboxChecked) {
-  //  let checkboxChecked = [...document.querySelectorAll('input[type=checkbox]:checked')];
+ export function filtroChecks(arregloEventos) {
+    let checkboxChecked = [...document.querySelectorAll('input[type=checkbox]:checked')];
     checkboxChecked = checkboxChecked.map(e=> e.value)
     
     let arregloFiltrado = arregloEventos
@@ -56,8 +57,37 @@ export function pintarTarjetas(arregloEventos, contenedor) {
     }
     return arregloFiltrado
   }
-    */
-
+    
+  export function cargarDetalles(evento, container) {
+   
+   
+    let card = document.createElement("div");
+    card.className = "card-details card border-success mb-3";
+      container.innerHTML = `
+          <div class="card mb-8">
+              <div class="row g-0">
+                  <div class="col-md-6">
+                      <img src=${evento.image} class="img-fluid rounded-start" alt=${evento.name}>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="card-body">
+                           <h5 class="card-title">${evento.name}</h5>
+                            <p class="card-text">${evento.description}</p>
+                            <p class="card-text">Date: ${evento.date}</p>
+                            <p class="card-text">Category: ${evento.category}</p>
+                            <p class="card-text">Place: ${evento.place}</p>
+                            <p class="card-text">Capacity: ${evento.capacity}</p>
+                            <p class="card-text">Assistance: ${evento.assistance ? evento.assistance : "No hay información"}</p>
+                            <p class="card-text">Estimate: ${evento.estimate ? evento.estimate : "No hay información"}</p>
+                            <p class="card-text">Price: US$ ${evento.price}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      `;
+      container.appendChild(card);
+  
+  } 
 
   /*
 
@@ -65,47 +95,4 @@ Events Stadistics
 Events with highest % of assistance	Events with lowest % of assistance	Events with larger capacity
 
 
-  */
-fetch("https://aulamindhub.github.io/amazing-api/events.json")
-  .then(response => response.json())
-  .then(data => {
-    let eventoMayorAsistencia = null;
-    let mayorPorcentaje = 0;
-
-    data.events.forEach(evento => {
-      let porcentaje = 0;
-      if (evento.assistance) {
-        porcentaje = (evento.assistance / evento.capacity) * 100;
-      } else if (evento.estimate) {
-        porcentaje = (evento.estimate / evento.capacity) * 100;
-      }
-
-      if (porcentaje > mayorPorcentaje) {
-        mayorPorcentaje = porcentaje;
-        eventoMayorAsistencia = evento;
-      }
-    });
-l
-
-
-
-    let resultado = `
-      El evento con mayor porcentaje de asistencia es:
-      Nombre: ${eventoMayorAsistencia.name}
-      Categoría: ${eventoMayorAsistencia.category}
-      Porcentaje de asistencia: ${mayorPorcentaje.toFixed(2)}%
-    `;
-
-    let contenedorResultado = document.getElementById("contenedor-resultado");
-    contenedorResultado.textContent = resultado;
-
-})
-  .catch(error => console.error('Error al obtener los datos:', error));
-  /*
-
-   <tr>
-            <td id="highest_assistance"></td>
-            <td id="lowest_assistance"></td>:
-            <td id="largest_capacity"></td>:
-          </tr>
   */

@@ -1,4 +1,4 @@
-
+/*
 const data = {
     currentDate: "2023-01-01",
     events: [
@@ -195,16 +195,104 @@ const data = {
       },
     ],
   };
+*/
 
-// usar la base de dato de la siguiente api
-function cargarDetalles() {
+import { cargarDetalles } from "../module/funciones.js";
+console.log(cargarDetalles); // Verifica que no sea undefined
+let url = "https://aulamindhub.github.io/amazing-api/events.json"
+const container = document.getElementById("containerdetails");
+console.log(container); // Verifica que no sea null
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data); // Verifica los datos obtenidos de la API
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventoId = urlParams.get('id');
+    console.log(`Evento ID: ${eventoId}`); // Verifica el ID del evento obtenido de la URL
+
+    let evento = data.events.find(event => {
+      console.log(`Comparando ${String(event._id)} con ${String(eventoId)}`); // Verifica los IDs de los eventos
+      return String(event._id) === String(eventoId);
+    });
+    if (!evento) {
+      console.error("No se encontró el evento con el ID proporcionado");
+      return;
+    }
+    console.log(evento); // Verifica que no sea null
+    cargarDetalles(evento, container);
+  } catch (error) {
+    console.error(error);
+  }
+});
+/*
+document.addEventListener("DOMContentLoaded",()=>{
+const urlParams = new URLSearchParams(window.location.search);
+const eventoId = urlParams.get('id');
+console.log(eventoId); // Verifica que no sea null
+if(!eventoId){
+  console.error("No se encontró el ID del evento en la URL");
+  return;
+}
+   
+ 
+
+// usar fetch para obtener los datos de la API
+//document.addEventListener("DOMContentLoaded",()=>{
+//console.log(eventoId); // Verifica que no sea null
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.events);
+    
+    /*
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventoId = urlParams.get('id');
+    console.log(eventoId); // Verifica que no sea null
+*/  
+
+  /*
+  // Buscar el evento por su ID
+   let evento = data.events.find(event => event._id === eventoId);
+   if(!evento){
+    console.error("No se encontró el evento con el ID proporcionado");
+    return
+   } // Verifica que no sea null
+console.log(evento); // Verifica que no sea null
+   cargarDetalles(evento, container);
+  })
+  .catch(error => console.error(error));
+
+});
+
+*/
+/*
+const fetchDetails = async() => {
+ await fetch(url)
+  .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
   const urlParams = new URLSearchParams(window.location.search);
   const eventoId = urlParams.get('id');
 
+  let evento = data.events.find(event => event._id === eventoId);
+  cargarDetalles(evento, container);
+})
+.catch(error => console.error(error));
+}
+fetchDetails();
+*/
+// Cargar detalles al iniciar la página
+//window.onload = cargarDetalles(evento, container);
+
+/*
+const urlParams = new URLSearchParams(window.location.search);
+  const eventoId = urlParams.get('id');
+function cargarDetalles() {
   
-
-
-
     const evento = data.events.find(event => event._id === eventoId);
     if (evento) {
         const container = document.getElementById("containerdetails");
@@ -233,8 +321,18 @@ function cargarDetalles() {
     } else {
         console.error("Evento no encontrado");
     }
-
 }
 
-// Cargar detalles al iniciar la página
+
 window.onload = cargarDetalles;
+*/
+ /* let url = "https://aulamindhub.github.io/amazing-api/events.json"
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+.catch(error => console.error(error));
+});
+*/
+// Cargar detalles al iniciar la página
