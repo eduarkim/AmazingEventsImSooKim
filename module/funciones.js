@@ -79,7 +79,7 @@ export function pintarTarjetas(arregloEventos, contenedor) {
                             <p class="card-text"><span class="fw-bold">Capacity:</span> ${evento.capacity}</p>
                             <p class="card-text"><span class="fw-bold">Assistance:</span> ${evento.assistance ? evento.assistance : "No hay información"}</p>
                             <p class="card-text"><span class="fw-bold">Estimate:</span> ${evento.estimate ? evento.estimate : "No hay información"}</p>
-                            <p class="card-text"><span class="fw-bold">Price:</span> US$ ${evento.price}</p>
+                            <p class="card-text"><span class="fw-bold">Price:</span> u$u ${evento.price}</p>
                       </div>
                   </div>
               </div>

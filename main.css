@@ -107,6 +107,10 @@ td {
 #imagentabla:hover{
     transform: scale(4);
 }
+
+.table-hover-custom tbody tr:hover {
+    background-color: orange; 
+  }
 /*
 
 #imgtabla {

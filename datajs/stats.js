@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   const dataTablas = await fetchDataTables(); // toda la data global
- 
+
 
   const datatotal = dataTablas.events; // data de los eventos totales
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let title = "";
     let asistencia = 0;
     let capacidad = 0;
-    let imagen ="";
+ //   let imagen = "";
     eventos.forEach((evento) => {
       const numero = (evento.assistance / evento.capacity) * 100;
       if (numero > porcentaje) {
@@ -47,10 +47,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         title = evento.name;
         asistencia = evento.assistance;
         capacidad = evento.capacity;
-        imagen = evento.image;
+   //     imagen = evento.image;
       }
     });
-    return `El mayor es ${title} con ${porcentaje.toFixed(2)}% de asistencia, (con una asistencia de ${asistencia}, sobre una capacidad de ${capacidad})`  }
+    return `El mayor es ${title} con ${porcentaje.toFixed(2)}% de asistencia, (con una asistencia de ${asistencia.toLocaleString('es-AR')}, sobre una capacidad de ${capacidad.toLocaleString('es-AR')})`
+  }
   //+`<div style="text-align: center;"><img id="imagentabla" src=${imagen} class="img-fluid rounded-start" alt="${title}"></div>`;
 
 
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let title = "";
     let asistencia = 0;
     let capacidad = 0;
-    let imagen = "";
+   // let imagen = "";
     eventos.forEach((evento) => {
       const numero = (evento.assistance / evento.capacity) * 100;
       if (numero < porcentaje) {
@@ -67,26 +68,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         title = evento.name;
         asistencia = evento.assistance;
         capacidad = evento.capacity;
-        imagen = evento.image;
+ //       imagen = evento.image;
       }
     });
-    return `El menor es ${title} con ${porcentaje}% de asistencia (con una asistencia de ${asistencia}, sobre una capacidad de ${capacidad})`
+    return `El menor es ${title} con ${porcentaje}% de asistencia (con una asistencia de ${asistencia.toLocaleString('es-AR')}, sobre una capacidad de ${capacidad.toLocaleString('es-AR')})`
   }
-//+`<br><div style="text-align: center;"><img id="imagentabla" src=${imagen} class="img-fluid rounded-start" alt="${title}"></div>`;
+  //+`<br><div style="text-align: center;"><img id="imagentabla" src=${imagen} class="img-fluid rounded-start" alt="${title}"></div>`;
   function mayorCapacidad(eventos) {
     let mayor = 0;
     let title = "";
-    let imagen = "";
+  //  let imagen = "";
     eventos.forEach((evento) => {
       if (evento.capacity > mayor) {
         mayor = evento.capacity;
         title = evento.name;
-        imagen = evento.image;
+   //     imagen = evento.image;
       }
     });
-    return `El mayor es ${title} con ${mayor} de capacidad`
+    return `El mayor es ${title} con ${mayor.toLocaleString('es-AR')} de capacidad`
   }
-//+`<br><div style="text-align: center;"><img id="imagentabla" src=${imagen} class="img-fluid rounded-start" alt="${title}"></div>`;
+  //+`<br><div style="text-align: center;"><img id="imagentabla" src=${imagen} class="img-fluid rounded-start" alt="${title}"></div>`;
   function infoPastEventsPorcategorias(categorias, eventos) {
     const array = [];
     categorias.forEach((categoria) => {
@@ -143,16 +144,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     futurosData
   );
 
- 
+
 
   const table = document.createElement("table");
   table.className =
-    "table caption-top table-secondary table-bordered border-success";
-  table.innerHTML = `<caption class="text-dark fw-bold">
-    Events statistics
-  </caption>
-
-  <thead>
+  "table table-hover table-hover-custom table-striped caption-top";
+  table.innerHTML = `
+  <thead class="table-dark">
+  <tr>
+  <th colspan="3" class="text-center text-white fw-bold">Events Statistics</th></tr
     <tr>
       <th>Event with the highest percentage of attendance</th>
       <th>Event with the lowest percentage of attendance</th>
@@ -168,45 +168,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     </tr>
   </tbody>`;
 
-  const tablePast = document.createElement("table");
-  const tbodyTablePast = document.createElement("tbody");
-  tablePast.className =
-    "table caption-top table-secondary table-bordered border-success";
-  tablePast.innerHTML = `<caption class="text-dark fw-bold">
-    Past events statistics
-  </caption>
-
-  <thead>
-    <tr>
-      <th>Categories</th>
-      <th>Revenues</th>
-      <th>Attendance</th>
-    </tr>
-  </thead>`;
-  for (const event of infoPastEventsByCats) {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${event.categoria}</td>
-      <td>${event.ingresos.toLocaleString("en", {
-        style: "currency",
-        currency: "USD",
-      })}</td>
-      <td>${event.attendance.toFixed(2)} %</td>`;
-    tbodyTablePast.appendChild(tr);
-  }
-
-  tablePast.appendChild(tbodyTablePast);
-
-
-
   const tableUpcoming = document.createElement("table");
   const tbodyTableUpcoming = document.createElement("tbody");
   tableUpcoming.className =
-    "table caption-top table-secondary table-bordered border-success";
-  tableUpcoming.innerHTML = `<caption class="text-dark fw-bold">
-    Upcoming events statistics
-  </caption>
-
-  <thead>
+  "table table-hover table-hover-custom table-striped caption-top";
+ 
+  tableUpcoming.innerHTML =
+    `<thead class="table-dark">
+    <tr>
+      <th colspan="3" class="text-center text-white fw-bold">  Upcoming events statistics</th>
+    </tr>
     <tr>
       <th>Categories</th>
       <th>Revenues</th>
@@ -217,15 +188,42 @@ document.addEventListener("DOMContentLoaded", async () => {
   for (const event of infoUpcomingEventsByCats) {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${event.category}</td>
-        <td>${event.ingresos.toLocaleString("en", {
-          style: "currency",
-          currency: "USD",
-        })}</td>
+        <td>${event.ingresos.toLocaleString('es-AR')} u$u</td>
         <td>${event.attendance.toFixed(2)} %</td>`;
     tbodyTableUpcoming.appendChild(tr);
   }
 
   tableUpcoming.appendChild(tbodyTableUpcoming);
 
+
+  const tablePast = document.createElement("table");
+  const tbodyTablePast = document.createElement("tbody");
+  tablePast.className =
+  "table table-hover table-hover-custom table-striped  caption-top";
+  //  "table caption-top table-secondary table-bordered border-success";
+  tablePast.innerHTML =
+    ` <thead class="table-dark">
+    <tr>
+      <th colspan="3" class="text-center text-white fw-bold">Past Events Statistics</th>
+    </tr>
+    <tr>
+      <th>Categories</th>
+      <th>Revenues</th>
+      <th>Attendance</th>
+    </tr>
+  </thead>`;
+  for (const event of infoPastEventsByCats) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${event.categoria}</td>
+      <td>${event.ingresos.toLocaleString('es-AR')} u$u</td>
+      <td>${event.attendance.toFixed(2)} %</td>`;
+    tbodyTablePast.appendChild(tr);
+  }
+
+  tablePast.appendChild(tbodyTablePast);
+
+
+
+  
   containerTables.append(table, tablePast, tableUpcoming);
 });
