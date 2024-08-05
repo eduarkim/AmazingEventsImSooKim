@@ -73,13 +73,13 @@ export function pintarTarjetas(arregloEventos, contenedor) {
                       <div class="card-body">
                            <h5 class="card-title">${evento.name}</h5>
                             <p class="card-text">${evento.description}</p>
-                            <p class="card-text">Date: ${evento.date}</p>
-                            <p class="card-text">Category: ${evento.category}</p>
-                            <p class="card-text">Place: ${evento.place}</p>
-                            <p class="card-text">Capacity: ${evento.capacity}</p>
-                            <p class="card-text">Assistance: ${evento.assistance ? evento.assistance : "No hay información"}</p>
-                            <p class="card-text">Estimate: ${evento.estimate ? evento.estimate : "No hay información"}</p>
-                            <p class="card-text">Price: US$ ${evento.price}</p>
+                            <p class="card-text"><span class="fw-bold">Date:</span> ${evento.date}</p>
+                            <p class="card-text"><span class="fw-bold">Category:</span> ${evento.category}</p>
+                            <p class="card-text"><span class="fw-bold">Place:</span> ${evento.place}</p>
+                            <p class="card-text"><span class="fw-bold">Capacity:</span> ${evento.capacity}</p>
+                            <p class="card-text"><span class="fw-bold">Assistance:</span> ${evento.assistance ? evento.assistance : "No hay información"}</p>
+                            <p class="card-text"><span class="fw-bold">Estimate:</span> ${evento.estimate ? evento.estimate : "No hay información"}</p>
+                            <p class="card-text"><span class="fw-bold">Price:</span> US$ ${evento.price}</p>
                       </div>
                   </div>
               </div>
