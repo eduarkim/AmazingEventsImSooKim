@@ -124,19 +124,3 @@ td {
 .rounded-table td {
     border: 1px solid #dee2e6;
 }
-/*
-.rounded-table thead th:first-child {
-    border-top-left-radius: 10px;
-}
-
-.rounded-table thead th:last-child {
-    border-top-right-radius: 10px;
-}
-
-.rounded-table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
-}
-
-.rounded-table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 10px;
-}
