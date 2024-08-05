@@ -99,3 +99,21 @@ td {
 .card:hover {
     transform: scale(1.05);
 }
+
+#imagentabla{
+    transition: transform 0.2s;   
+}
+
+#imagentabla:hover{
+    transform: scale(4);
+}
+/*
+
+#imgtabla {
+    transition: transform 0.2s;
+}
+
+#imgtabla:hover {
+    transform: scale(2.5);
+}
+*/

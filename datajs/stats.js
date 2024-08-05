@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let title = "";
     let asistencia = 0;
     let capacidad = 0;
+    let imagen ="";
     eventos.forEach((evento) => {
       const numero = (evento.assistance / evento.capacity) * 100;
       if (numero > porcentaje) {
@@ -46,16 +47,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         title = evento.name;
         asistencia = evento.assistance;
         capacidad = evento.capacity;
+        imagen = evento.image;
       }
     });
-    return `El mayor es ${title} con ${porcentaje.toFixed(2)}% de asistencia, (con una asistencia de ${asistencia}, sobre una capacidad de ${capacidad})`;
-  }
+    return `El mayor es ${title} con ${porcentaje.toFixed(2)}% de asistencia, (con una asistencia de ${asistencia}, sobre una capacidad de ${capacidad})`  }
+  //+`<div style="text-align: center;"><img id="imagentabla" src=${imagen} class="img-fluid rounded-start" alt="${title}"></div>`;
+
 
   function calcularMenor(eventos) {
     let porcentaje = 100;
     let title = "";
     let asistencia = 0;
     let capacidad = 0;
+    let imagen = "";
     eventos.forEach((evento) => {
       const numero = (evento.assistance / evento.capacity) * 100;
       if (numero < porcentaje) {
@@ -63,23 +67,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         title = evento.name;
         asistencia = evento.assistance;
         capacidad = evento.capacity;
+        imagen = evento.image;
       }
     });
-    return `El menor es ${title} con ${porcentaje}% de asistencia (con una asistencia de ${asistencia}, sobre una capacidad de ${capacidad})`;
+    return `El menor es ${title} con ${porcentaje}% de asistencia (con una asistencia de ${asistencia}, sobre una capacidad de ${capacidad})`
   }
-
+//+`<br><div style="text-align: center;"><img id="imagentabla" src=${imagen} class="img-fluid rounded-start" alt="${title}"></div>`;
   function mayorCapacidad(eventos) {
     let mayor = 0;
     let title = "";
+    let imagen = "";
     eventos.forEach((evento) => {
       if (evento.capacity > mayor) {
         mayor = evento.capacity;
         title = evento.name;
+        imagen = evento.image;
       }
     });
-    return `El mayor es ${title} con ${mayor} de capacidad`;
+    return `El mayor es ${title} con ${mayor} de capacidad`
   }
-
+//+`<br><div style="text-align: center;"><img id="imagentabla" src=${imagen} class="img-fluid rounded-start" alt="${title}"></div>`;
   function infoPastEventsPorcategorias(categorias, eventos) {
     const array = [];
     categorias.forEach((categoria) => {
