@@ -1,6 +1,6 @@
 export function pintarTarjetas(arregloEventos, contenedor) {
     let tamanio = arregloEventos.length;
-   // let contenedor = document.getElementById("divtarjetas");
+  
     contenedor.innerHTML = "";
     for (let i = 0; i < tamanio; i++) {
       let tarjeta = document.createElement("div");
@@ -89,10 +89,3 @@ export function pintarTarjetas(arregloEventos, contenedor) {
   
   } 
 
-  /*
-
-Events Stadistics
-Events with highest % of assistance	Events with lowest % of assistance	Events with larger capacity
-
-
-  */
