@@ -102,9 +102,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           acum + ((event.assistance || event.estimate) / event.capacity) * 100,
         0
       );
+      const ingresosPromedio = ingresos / catEvents.length;
       array.push({
         categoria,
         ingresos,
+        ingresosPromedio,
         attendance: attendance / catEvents.length,
       });
     });
@@ -130,9 +132,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           acum + ((event.assistance || event.estimate) / event.capacity) * 100,
         0
       );
+      const ingresosPromedio = ingresos / catEvents.length;
       array.push({
         category,
         ingresos,
+        ingresosPromedio,
         attendance: attendance / catEvents.length,
       });
     });
@@ -176,11 +180,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   tableUpcoming.innerHTML =
     `<thead class="table-dark">
     <tr>
-      <th colspan="3" class="text-center text-white fw-bold">  Upcoming events statistics</th>
+      <th colspan="4" class="text-center text-white fw-bold">  Upcoming events statistics</th>
     </tr>
     <tr>
       <th>Categories</th>
       <th>Revenues</th>
+      <th>Promedio de ingresos</th>
       <th>Attendance</th>
     </tr>
   </thead>`;
@@ -189,6 +194,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${event.category}</td>
         <td>${event.ingresos.toLocaleString('es-AR')} u$u</td>
+        <td>${event.ingresosPromedio.toLocaleString('es-AR')} u$u</td>
         <td>${event.attendance.toFixed(2)} %</td>`;
     tbodyTableUpcoming.appendChild(tr);
   }
@@ -204,11 +210,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   tablePast.innerHTML =
     ` <thead class="table-dark">
     <tr>
-      <th colspan="3" class="text-center text-white fw-bold">Past Events Statistics</th>
+      <th colspan="4" class="text-center text-white fw-bold">Past Events Statistics</th>
     </tr>
     <tr>
       <th>Categories</th>
       <th>Revenues</th>
+      <th>Promedio de ingresos</th>
       <th>Attendance</th>
     </tr>
   </thead>`;
@@ -216,6 +223,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${event.categoria}</td>
       <td>${event.ingresos.toLocaleString('es-AR')} u$u</td>
+      <td>${event.ingresosPromedio.toLocaleString('es-AR')} u$u</td>
       <td>${event.attendance.toFixed(2)} %</td>`;
     tbodyTablePast.appendChild(tr);
   }
