@@ -172,6 +172,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     </tr>
   </tbody>`;
 
+  const tableResponsive = document.createElement("div");
+tableResponsive.className = "table-responsive";
+tableResponsive.appendChild(table);
+
   const tableUpcoming = document.createElement("table");
   const tbodyTableUpcoming = document.createElement("tbody");
   tableUpcoming.className =
@@ -200,7 +204,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   tableUpcoming.appendChild(tbodyTableUpcoming);
-
+  const tableUpcomingResponsive = document.createElement("div");
+  tableUpcomingResponsive.className = "table-responsive";
+  tableUpcomingResponsive.appendChild(tableUpcoming);
 
   const tablePast = document.createElement("table");
   const tbodyTablePast = document.createElement("tbody");
@@ -229,9 +235,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   tablePast.appendChild(tbodyTablePast);
-
+  const tablePastResponsive = document.createElement("div");
+  tablePastResponsive.className = "table-responsive";
+  tablePastResponsive.appendChild(tablePast);
 
 
   
-  containerTables.append(table, tablePast, tableUpcoming);
+  containerTables.append(tableResponsive, tablePastResponsive, tableUpcomingResponsive);
 });
