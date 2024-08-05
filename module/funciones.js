@@ -62,7 +62,7 @@ export function cargarDetalles(evento, container) {
 
 
   let card = document.createElement("div");
-  card.className = "card-details card border-success mb-3";
+  card.className = "card-details card mb-3";
   container.innerHTML = `
           <div class="card mb-8">
               <div class="row g-0">
