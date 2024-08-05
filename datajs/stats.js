@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const table = document.createElement("table");
   table.className =
-  "table table-hover table-hover-custom table-striped caption-top";
+  "table table-hover table-hover-custom table-striped caption-top rounded-table";
   table.innerHTML = `
   <thead class="table-dark">
   <tr>
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const tableUpcoming = document.createElement("table");
   const tbodyTableUpcoming = document.createElement("tbody");
   tableUpcoming.className =
-  "table table-hover table-hover-custom table-striped caption-top";
+  "table table-hover table-hover-custom table-striped caption-top rounded-table";
  
   tableUpcoming.innerHTML =
     `<thead class="table-dark">
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const tablePast = document.createElement("table");
   const tbodyTablePast = document.createElement("tbody");
   tablePast.className =
-  "table table-hover table-hover-custom table-striped  caption-top";
+  "table table-hover table-hover-custom table-striped caption-top rounded-table";
   //  "table caption-top table-secondary table-bordered border-success";
   tablePast.innerHTML =
     ` <thead class="table-dark">
