@@ -193,8 +193,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   for (const event of infoUpcomingEventsByCats) {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${event.category}</td>
-        <td>${event.ingresos.toLocaleString('es-AR')} u$u</td>
-        <td>${event.ingresosPromedio.toLocaleString('es-AR')} u$u</td>
+        <td>u$u ${event.ingresos.toLocaleString('es-AR')}</td>
+        <td>u$u ${event.ingresosPromedio.toLocaleString('es-AR')}</td>
         <td>${event.attendance.toFixed(2)} %</td>`;
     tbodyTableUpcoming.appendChild(tr);
   }
@@ -222,8 +222,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   for (const event of infoPastEventsByCats) {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${event.categoria}</td>
-      <td>${event.ingresos.toLocaleString('es-AR')} u$u</td>
-      <td>${event.ingresosPromedio.toLocaleString('es-AR')} u$u</td>
+      <td>u$u ${event.ingresos.toLocaleString('es-AR')}</td>
+      <td>u$u ${event.ingresosPromedio.toLocaleString('es-AR')}</td>
       <td>${event.attendance.toFixed(2)} %</td>`;
     tbodyTablePast.appendChild(tr);
   }
