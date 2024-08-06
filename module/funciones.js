@@ -1,6 +1,8 @@
 export function pintarTarjetas(arregloEventos, contenedor) {
   let tamanio = arregloEventos.length;
 
+
+
   contenedor.innerHTML = "";
   for (let i = 0; i < tamanio; i++) {
     let tarjeta = document.createElement("div");
@@ -87,5 +89,7 @@ export function cargarDetalles(evento, container) {
       `;
   container.appendChild(card);
 
+  
 }
+
 

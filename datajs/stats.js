@@ -1,19 +1,20 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded",  () => {
   const dataUrl = "https://aulamindhub.github.io/amazing-api/events.json";
   const containerTables = document.getElementById("contenedordetablas");
 
-  const fetchDataTables = async () => {
-    try {
-      const response = await fetch(dataUrl);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  };
+const fetchDataTables = async () => {
+  try {
+    const response = await fetch(dataUrl);
+    return await response.json();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 
-  const dataTablas = await fetchDataTables(); // toda la data global
+fetchDataTables().then(dataTablas => {
+  if (!dataTablas) return;
+
 
 
   const datatotal = dataTablas.events; // data de los eventos totales
@@ -243,3 +244,6 @@ tableResponsive.appendChild(table);
   
   containerTables.append(tableResponsive, tablePastResponsive, tableUpcomingResponsive);
 });
+
+})
+.catch(error => console.log(error));

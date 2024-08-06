@@ -4,11 +4,11 @@ let url = "https://aulamindhub.github.io/amazing-api/events.json"
 const container = document.getElementById("containerdetails");
 console.log(container); 
 
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data); 
+document.addEventListener('DOMContentLoaded', () => {
+  fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
 
     const urlParams = new URLSearchParams(window.location.search);
     const eventoId = urlParams.get('id');
@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     console.log(evento); 
     cargarDetalles(evento, container);
-  } catch (error) {
+  } )
+  
+  .catch(error => {
     console.error(error);
-  }
-});
+  });
+})
