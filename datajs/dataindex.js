@@ -29,6 +29,7 @@ let url = "https://aulamindhub.github.io/amazing-api/events.json"
           mensajeNoResultados.textContent = "No se encontraron resultados";
           contenedorTarjetas.innerHTML = "";
           contenedorTarjetas.appendChild(mensajeNoResultados);
+       
         }
       });
       
